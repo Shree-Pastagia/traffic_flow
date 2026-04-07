@@ -1,14 +1,31 @@
 from sklearn.preprocessing import LabelEncoder
+import joblib
 
 def encode_features(X):
 
-    # Make a copy to avoid warnings
+    # Make safe copy
     X = X.copy()
 
-    le = LabelEncoder()
+    encoders = {}
 
     for column in X.columns:
+
         if X[column].dtype == "object":
-            X.loc[:, column] = le.fit_transform(X[column])
+
+            le = LabelEncoder()
+
+            X[column] = le.fit_transform(
+                X[column]
+            )
+
+            encoders[column] = le
+
+    # Save encoders
+    joblib.dump(
+        encoders,
+        "models/encoders.pkl"
+    )
+
+    print("Encoders saved successfully.")
 
     return X

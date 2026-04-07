@@ -1,4 +1,8 @@
 import joblib
+from src.model_evaluation import (
+    evaluate_model,
+    plot_feature_importance
+)
 
 from src.data_preprocessing import (
     load_data,
@@ -28,20 +32,29 @@ df = preprocess_data(df)
 # Select features
 
 features = [
-    "Area Name",
+
+    "Hour",
+    "Day_of_week",
+    "Month",
+    "Is_Weekend",
+    "Weather Conditions",
+    "Temperature",
+    "Humidity",
+    "Visibility",
+    "Precipitation",
+    "Holiday",
+    "Road_Type",
+
+    # Internal features
     "Traffic Volume",
     "Average Speed",
-    "Incident Reports",
     "Public Transport Usage",
     "Parking Usage",
     "Pedestrian and Cyclist Count",
-    "Weather Conditions",
-    "Roadwork and Construction Activity",
-    "Day_of_week",
-    "Month",
-    "Is_Weekend"
-]
+    "Incident Reports",
+    "Roadwork and Construction Activity"
 
+]
 X = df[features]
 
 y = df["Congestion_Category"]
@@ -58,6 +71,8 @@ accuracy = evaluate_model(
     X_test,
     y_test
 )
+
+plot_feature_importance(model, X)
 
 # Save model
 joblib.dump(
