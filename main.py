@@ -1,10 +1,8 @@
 import joblib
+
 from src.model_evaluation import (
     evaluate_model,
-    plot_model_comparison
-)
-from src.model_evaluation import (
-    evaluate_model,
+    plot_model_comparison,
     plot_feature_importance
 )
 
@@ -76,9 +74,9 @@ accuracy = evaluate_model(
     y_test
 )
 
+plot_feature_importance(model, X)
 plot_model_comparison(results)
 
-plot_feature_importance(model, X)
 
 # Save model
 joblib.dump(

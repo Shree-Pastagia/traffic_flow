@@ -101,3 +101,79 @@ def plot_model_comparison(results):
     )
 
     plt.show()
+
+def plot_feature_importance(model, X):
+
+    import pandas as pd
+    import matplotlib.pyplot as plt
+    import seaborn as sns
+
+    # Get importance values
+    importances = model.feature_importances_
+
+    feature_names = X.columns
+
+    feature_df = pd.DataFrame({
+        "Feature": feature_names,
+        "Importance": importances
+    })
+
+    feature_df = feature_df.sort_values(
+        by="Importance",
+        ascending=False
+    )
+
+    plt.figure(figsize=(10,6))
+
+    sns.barplot(
+        x="Importance",
+        y="Feature",
+        data=feature_df
+    )
+
+    plt.title("Feature Importance")
+
+    plt.savefig(
+        "outputs/plots/feature_importance.png"
+    )
+
+    plt.show()
+
+def plot_feature_importance(model, X):
+
+    import pandas as pd
+    import matplotlib.pyplot as plt
+    import seaborn as sns
+
+    # Only works for Random Forest
+    if hasattr(model, "feature_importances_"):
+
+        importances = model.feature_importances_
+
+        feature_names = X.columns
+
+        feature_df = pd.DataFrame({
+            "Feature": feature_names,
+            "Importance": importances
+        })
+
+        feature_df = feature_df.sort_values(
+            by="Importance",
+            ascending=False
+        )
+
+        plt.figure(figsize=(10,6))
+
+        sns.barplot(
+            x="Importance",
+            y="Feature",
+            data=feature_df
+        )
+
+        plt.title("Feature Importance")
+
+        plt.savefig(
+            "outputs/plots/feature_importance.png"
+        )
+
+        plt.show()

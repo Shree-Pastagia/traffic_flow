@@ -15,7 +15,9 @@ def train_model(X, y):
         DecisionTreeClassifier(),
 
         "Logistic Regression":
-        LogisticRegression(max_iter=3000),
+        LogisticRegression(
+            max_iter=10000,
+            solver="saga"),
 
         "Random Forest":
         RandomForestClassifier()
