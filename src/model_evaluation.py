@@ -76,3 +76,28 @@ def plot_feature_importance(model, X):
     )
 
     plt.show()
+
+def plot_model_comparison(results):
+
+    import matplotlib.pyplot as plt
+
+    names = list(results.keys())
+    scores = list(results.values())
+
+    plt.figure(figsize=(8,5))
+
+    plt.bar(
+        names,
+        scores
+    )
+
+    plt.title("Model Comparison")
+
+    plt.xlabel("Models")
+    plt.ylabel("Accuracy")
+
+    plt.savefig(
+        "outputs/plots/model_comparison.png"
+    )
+
+    plt.show()

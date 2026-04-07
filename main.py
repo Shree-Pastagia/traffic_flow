@@ -1,6 +1,10 @@
 import joblib
 from src.model_evaluation import (
     evaluate_model,
+    plot_model_comparison
+)
+from src.model_evaluation import (
+    evaluate_model,
     plot_feature_importance
 )
 
@@ -63,7 +67,7 @@ y = df["Congestion_Category"]
 X = encode_features(X)
 
 # Train model
-model, X_test, y_test = train_model(X, y)
+model, X_test, y_test,results = train_model(X, y)
 
 # Evaluate model
 accuracy = evaluate_model(
@@ -71,6 +75,8 @@ accuracy = evaluate_model(
     X_test,
     y_test
 )
+
+plot_model_comparison(results)
 
 plot_feature_importance(model, X)
 
@@ -81,3 +87,10 @@ joblib.dump(
 )
 
 print("Model saved successfully.")
+print("\nModel Comparison Results:")
+
+for model_name, score in results.items():
+
+    print(
+        f"{model_name}: {score}"
+    )
